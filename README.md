@@ -1,48 +1,51 @@
-# PLC_projekts
+# 🛠️ PLC & HMI Testa Uzdevums Candidates
 
+Sveiki! Apsveicam ar pievienošanos mūsu atlasē. Šajā dokumentā atradīsi instrukcijas darba uzdevuma izpildei.
 
-Sveiki! Šeit ir instrukcija darba uzdevuma izpildei:
+---
 
-### 1. Darba vides sagatavošana
+## 📌 1. Vispārīgie noteikumi un darba gaita
+
+### Darba vides sagatavošana
 * Lejupielādē darba vidi, izmantojot pogu **Download ZIP**.
-![alt text](<Screenshot 2026-10-02 144848.png>)
-* Atarhivē mapi un visas tālākās darbības veic tikai šajā mapē.
+  
+  ![Download ZIP pamācība](<Screenshot 2026-10-02 144848.png>)
+
+* Atarhivē mapi un visas tālākās darbības veic tikai tajā.
 * Galarezultātu atstāj tajā pašā mapē.
 
-### 2. Uzdevuma izpilde
+### Mapju struktūra un darba izpilde
 * Strādā **PLC** un **HMI** mapēs.
-* Gatavos PLC un HMI projektus ievieto tiem atbilstošajās mapēs.
+* Gatavos TIA Portal un EasyBuilder Pro projektus saglabā tiem atbilstošajās mapēs.
 
-### 3. Git un versiju kontrole
+### Git un versiju kontrole
 * Mēs ikdienā izmantojam **Git** versiju kontroli, tāpēc pirms darba sākšanas iepazīsties ar tā darbības pamatprincipiem un **Git Desktop** lietošanu.
 
-### 4. Darba nodošana
+### Darba nodošana
 * Kad uzdevums ir pabeigts, sazipo darba mapi un nosūti to mums atpakaļ.
 
-Veiksmi darbā!
+---
 
+## 🚀 Uzdevuma apraksts
 
-# 🚀 Darba uzdevums
+Visus izstrādei nepieciešamos failus atradīsi projekta mapē.
 
-Zemāk ir aprakstīts konkrētais darba uzdevums. Visus izstrādei nepieciešamos failus atradīsi projekta mapē.
-
-> **Piezīme:** Šis uzdevums ir ņemts no reāla projekta, taču pilnu projektu realizēt nav nepieciešams — tev būs jāizveido loģika tikai dažiem procesa posmiem.
-
-> Šeit nav sniegts pilns detalizēts risinājuma apraksts, bet gan tikai galvenie principi un uzdevumi. Tādēļ tev pašam būs jāpieņem inženiertehniskie lēmumi par to, ko un kā vislabāk uzbūvēt.
+> **Piezīme:** Šis uzdevums ir ņemts no reāla ražošanas projekta, taču pilnu projektu realizēt nav nepieciešams — tev būs jāizveido loģika tikai dažiem atsevišķiem procesa posmiem.
+> 
+> Šeit nav sniegts pilns detalizēts risinājuma apraksts, bet gan galvenie principi un prasības, tādēļ tev pašam būs jāpieņem inženiertehniskie lēmumi par sistēmas uzbūvi.
 
 ### 🛠️ Izmantojamā programmatūra
 * **PLC daļai:** Siemens **TIA Portal**
 * **HMI daļai:** **EasyBuilder Pro** (Weintek)
 
-Izmanto sev ērtākās šo programmu versijas.
+*Piezīme: Izmanto sev ērtākās šo programmu versijas.*
+
+> ⚠️ **Svarīgi par PLC programmēšanas valodām:**
+> PLC projektā drīkst izmantot **tikai Ladder (LAD)** un **Structured Text (ST / SCL)** valodas. FBD un citas valodas projektā **neizmantojam**.
 
 ---
 
-> **Svarīgi par PLC programmēšanas valodām:**
-> PLC projektā drīkst izmantot **tikai Ladder (LAD)** un **Structured Text (ST / SCL)** valodas. 
-> FBD un citas valodas projektā **neizmantojam**.
-
-## ⚙️ PLC 1. uzdevums
+## ⚙️ PLC 1. uzdevums: Objekta arhitektūra un I/O
 
 Mapē atradīsi **IO sarakstu**, kurā norādīti PLC modeļi, ieeju/izeju saraksts un iekārtu saraksts.
 
@@ -50,47 +53,48 @@ Projektā obligāti jāizmanto **objektorientēta pieeja**:
 * Vispirms jāizveido funkciju bloki visām iekārtām, kas atkārtojas (motors, vārsts u.c.).
 * Visa pārējā loģika, kas saistīta ar iekārtu vadību, tiek realizēta, vēršoties pie šiem funkciju blokiem vai saistītajiem datu blokiem (DB).
 
+### Izstrādes gaita:
 
-
-#### Izstrādes gaita:
 1. **Datu struktūras (UDT):**
    * Izveido lietotāja definētās datu struktūras (`UDT`), kas apraksta visus iekārtai nepieciešamos datus: vadības komandas, statusus, trauksmes un iestatījumus.
-   ![alt text](image-2.png)
+   
+   ![UDT piemērs](image-2.png)
+
 2. **Funkciju bloki (FB):**
    * Izveido funkciju blokus, kas pieņem visus ar iekārtas darbību saistītos I/O signālus (statusa signālus, devējus, izejas) un `IN_OUT` mainīgo, kas pieņem attiecīgā elementa `UDT`.
    * Visu loģiku bloka iekšienē realizē, izmantojot tikai `UDT` un funkciju bloka mainīgos.
-   ![alt text](image-3.png)
+   
+   ![FB piemērs](image-3.png)
+
 3. **Datu bloks (DB) un komunikācija:**
    * Izveido globālo datu bloku, kurā inicializē visus `UDT` un iekārtu aprakstošos mainīgos (šis datu bloks vēlāk tiks izmantots komunikācijai ar HMI).
-   ![alt text](image-1.png)
+   
+   ![DB piemērs](image-1.png)
+
 4. **Bloku inicializācija:**
-   * Izsauc funkciju blokus galvenajā programmā, piesaistot datu bloka struktūras un reālās I/O no PLC moduļiem.
-   ![alt text](image.png)
+   * Izsauc funkciju blokus galvenajā programmā, piesaistot datu bloka structures un reālās I/O no PLC moduļiem.
+   
+   ![FB izsauksmes piemērs](image.png)
 
-
-> **Piezīme par inicializāciju:** Inicializē tikai tās iekārtas, kas būs tieši nepieciešamas **2. PLC uzdevuma** izpildei!
-
----
+> 💡 **Piezīme par inicializāciju:** Inicializē tikai tās iekārtas, kas būs tieši nepieciešamas **2. PLC uzdevuma** izpildei!
 
 ### Nepieciešamie funkciju bloki
-
 Tev jāizveido funkciju bloki un UDT šādām iekārtām:
 * **Motors**
 * **Vārsts**
 * **Silosi**
 
-> **Svarīgi loģikā:**
+> ⚠️ **Svarīgi loģikā:**
 > Izpēti IO sarakstu! Motoru un citu iekārtu funkciju blokā jāparedz ārējie apturēšanas signāli un aizsardzības. Uztaisi maksimālās komplektācijas funkciju bloku ar iespēju atslēgt vai apiet nevajadzīgās funkcijas tām iekārtām, kurām dažu devēju nav, bet pamata darbības loģika nemainās.
-
----
 
 ### 📋 PLC 1. uzdevuma kopsavilkums:
 1. **Izpēti IO** sarakstu.
 2. **Izveido UDT un funkciju blokus** iekārtām, kas atkārtojas (Motors, Vārsts, Siloss).
 3. **Inicializē iekārtu funkciju blokus un datu bloku** priekš HMI, izmantojot UDT un reālās PLC ieejas/izejas.
 
+---
 
-## ⚙️ PLC 2. Uzdevums: Procesa loģikas un maršruta izstrāde
+## ⚙️ PLC 2. uzdevums: Procesa loģikas un maršruta izstrāde
 
 Šajā uzdevumā tev jāizveido automātiskā procesa vadības loģika, izmantojot 1. uzdevumā izveidotos iekārtu objektus (UDT / FB). 
 
@@ -98,35 +102,34 @@ Tev jāizveido funkciju bloki un UDT šādām iekārtām:
 > * Visas darbības ar iekārtām tiek veiktas **tikai caur to objektiem** (piemēram: dod komandu motoram ieslēgties, atvērt vārstu pozīcijā Nr. 1 u.tml.).
 > * Tiešā vēršanās pie reālajām I/O ir pieļaujama tikai tādiem elementiem, kas nav saistīti ar atsevišķu iekārtu iekšējo loģiku (piemēram, avārijas stop pogas vai citi vispārējās biznesa loģikas signāli).
 
----
-
 ### 🗺️ Tehnoloģiskais uzdevums:
 Izpēti pievienoto **tehnoloģisko shēmu**. Tev jāizstrādā automātiskā maršruta vadības loģika līnijai: **`SILO1` ➔ `PILE1`**.
 
-#### 1. Maršruta palaišana (Start):
-* Operators nospiež pogu **"Ieslēgt maršrutu"** (*pagaidām PLC mainīgais*).
-* PLC pārbauda, vai visas maršrutā iesaistītās iekārtas ir bez kļūdām (`OK`).
-* Ja viss ir kārtībā, sākas iekārtu ieslēgšana/pārslēgšana pareizajās pozīcijās.
-* **Ieslēgšanas secība:** Notiek virzienā **no maršruta gala uz sākumu** (piem., `DV4`, `E3`, ...).
- Iekārtas tiek ieslēgtas secīgi ar **regulējamu laika aizkavi** (motorus ieslēdzam, vārstus pārslēdzam vajadzīgajā pozīcijā).
+1. **Maršruta palaišana (Start):**
+   * Operators nospiež pogu **"Ieslēgt maršrutu"** (*pagaidām PLC mainīgais*).
+   * PLC pārbauda, vai visas maršrutā iesaistītās iekārtas ir bez kļūdām (`OK`).
+   * Ja viss ir kārtībā, sākas iekārtu ieslēgšana/pārslēgšana pareizajās pozīcijās.
+   * **Ieslēgšanas secība:** Notiek virzienā **no maršruta gala uz sākumu** (piem., `DV4`, `E3`, ...).
+   * **Izpilde:** Iekārtas tiek ieslēgtas secīgi ar **regulējamu laika aizkavi** (motorus ieslēdzam, vārstus pārslēdzam vajadzīgajā pozīcijā).
 
-#### 2. Maršruta apturēšana (Stop):
-* Maršruts tiek izslēgts, ja:
-  * Operators nospiež pogu **"Izslēgt maršrutu"** (*PLC mainīgais*), **vai**
-  * Siloss (`SILO1`) kļūst tukšs.
-* **Izslēgšanas secība:** Notiek virzienā **no maršruta sākuma uz galu** (piem., `SILO1`, `SH1`, ...) ar regulējamu laika aizkavi, lai attīrītu līnijas.
+2. **Maršruta apturēšana (Stop):**
+   * Maršruts tiek izslēgts, ja:
+     * Operators nospiež pogu **"Izslēgt maršrutu"** (*PLC mainīgais*), **vai**
+     * Siloss (`SILO1`) kļūst tukšs.
+   * **Izslēgšanas secība:** Notiek virzienā **no maršruta sākuma uz galu** (piem., `SILO1`, `SH1`, ...) ar regulējamu laika aizkavi, lai attīrītu līnijas.
 
-#### 3. Maršruta statusa uzskaite:
-* Izveido mainīgo, kas ataino maršruta pašreizējo statusu:
-  * `OFF` (Izslēgts)
-  * `NOTIEK STARTS` (Sākšanas process)
-  * `DARBS` (Aktīvs darba režīms)
-  * `IZSLĒGŠANA` (Secīgās apturēšanas process)
-  * `KĻŪDA` (Sistēmas trauksme)
+3. **Maršruta statusa uzskaite:**
+   * Izveido mainīgo, kas ataino maršruta pašreizējo statusu:
+     * `OFF` (Izslēgts)
+     * `NOTIEK STARTS` (Sākšanas process)
+     * `DARBS` (Aktīvs darba režīms)
+     * `IZSLĒGŠANA` (Secīgās apturēšanas process)
+     * `KĻŪDA` (Sistēmas trauksme)
 
-#### 4. Drošība un avārijas apturēšana:
-* Ja laikā, kad maršruts ir aktīvs (*DARBS* vai *STARTS*), kādai no maršrutā iesaistītajām iekārtām rodas **kļūda**, viss maršruts un visas tajā esošās iekārtas tiek **izslēgtas momentāni** (bez aizkaves).
+4. **Drošība un avārijas apturēšana:**
+   * Ja laikā, kad maršruts ir aktīvs (*DARBS* vai *STARTS*), kādai no maršrutā iesaistītajām iekārtām rodas **kļūda**, viss maršruts un visas tajā esošās iekārtas tiek **izslēgtas momentāni** (bez aizkaves).
 
+---
 
 ## 🖥️ HMI Uzdevums: Vizualizācija un komunikācija
 
@@ -134,21 +137,18 @@ Izpēti pievienoto **tehnoloģisko shēmu**. Tev jāizstrādā automātiskā mar
 
 Projektā tiek izmantots **Weintek HMI**. Tā izstrādes vide (**EasyBuilder Pro**) ir bez maksas un lejupielādējama no ražotāja oficiālās mājaslapas.
 
----
-
 ### 1. PLC un HMI komunikācijas iestatīšana
 * Izveido projektu atbilstošajam Weintek HMI modelim.
 * Importē nepieciešamos datus no PLC projekta, lai tos izmantotu vizualizācijā.
 * **Ieteicamais komunikācijas draiveris:** `Siemens S7-1200 (Absolute Addressing)` *(var izmantot arī citu sev ērtu draiveri)*.
 * IP adreses šobrīd nav būtiskas — galvenais ir veiksmīgi importēt tagus.
 
+> ⚠️ **Brīdinājums!** Tagus un mainīgos izveido/importē **tikai tām iekārtām, kas ir tieši iesaistītas 2. PLC uzdevumā**!
+
 #### 💡 Tagu importēšanas gaita (`Import Tags`):
 1. EasyBuilder Pro nospied pogu **Import Tags**.
 2. Izvēlies iespēju importēt datus tieši no TIA Portal projekta vai konkrēta DB faila *(rekomendējam importēt visu TIA Portal projektu un atzīmēt tikai vajadzīgos DB)*.
-
- ⚠️ **Svarīgi:** Pirms TIA Portal projekta importēšanas EasyBuilder Pro vidē, **TIA Portal programmai obligāti jābūt aizvērtai!**
-
----
+3. ⚠️ **Svarīgi:** Pirms TIA Portal projekta importēšanas EasyBuilder Pro vidē, **TIA Portal programmai obligāti jābūt aizvērtai!**
 
 ### 2. Vizualizācijas prasības
 
@@ -158,14 +158,18 @@ Kad dati ir sasaistīti, izveido vizualizācijas saskarni. Dizains šobrīd nav 
 * **`CC2` statusu** (piemēram: `OFF`, `ON`, `KĻŪDA` u.c.).
 * **Maršruta statusu** (`OFF`, `STARTS`, `DARBS`, `IZSLĒGŠANA`, `KĻŪDA`).
 * **Maršruta vadības pogas:** "Ieslēgt maršrutu" un "Izslēgt maršrutu".
-* **Kļūdu sarakstu:** Konfigurē `CC2` kļūdu signālus iebūvētajā HMI kļūdu/trauksmes (Alarm List) logā.
+* **Kļūdu sarakstu:** Konfigurē `CC2` kļūdu signālus iebūvētajā HMI kļūdu/trauksmes (*Alarm List*) logā.
 
 ---
 
-> ℹ️ *Zemāk atradīsi mūsu esošās vizualizācijas piemērus iedvesmai.*
+### 🎨 Vizualizācijas piemēri (iedvesmai):
 
-![alt text](image-5.png)
+![Vizualizācijas piemērs 1](image-5.png)
 
-![alt text](image-6.png)
+![Vizualizācijas piemērs 2](image-6.png)
 
-![alt text](image-7.png)
+![Vizualizācijas piemērs 3](image-7.png)
+
+---
+
+**Veiksmi uzdevuma izpildē!**
