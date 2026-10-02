@@ -9,7 +9,7 @@ Sveiki! Apsveicam ar pievienošanos mūsu atlasē. Šajā dokumentā atradīsi i
 ### Darba vides sagatavošana
 * Lejupielādē darba vidi, izmantojot pogu **Download ZIP**.
   
-  ![Download ZIP pamācība](<Screenshot 2026-10-02 144848.png>)
+  ![Download ZIP pamācība](img/Screenshot%202026-10-02%20144848.png)
 
 * Atarhivē mapi un visas tālākās darbības veic tikai tajā.
 * Galarezultātu atstāj tajā pašā mapē.
@@ -58,23 +58,23 @@ Projektā obligāti jāizmanto **objektorientēta pieeja**:
 1. **Datu struktūras (UDT):**
    * Izveido lietotāja definētās datu struktūras (`UDT`), kas apraksta visus iekārtai nepieciešamos datus: vadības komandas, statusus, trauksmes un iestatījumus.
    
-   ![UDT piemērs](image-2.png)
+   ![UDT piemērs](img/image-2.png)
 
 2. **Funkciju bloki (FB):**
    * Izveido funkciju blokus, kas pieņem visus ar iekārtas darbību saistītos I/O signālus (statusa signālus, devējus, izejas) un `IN_OUT` mainīgo, kas pieņem attiecīgā elementa `UDT`.
    * Visu loģiku bloka iekšienē realizē, izmantojot tikai `UDT` un funkciju bloka mainīgos.
    
-   ![FB piemērs](image-3.png)
+   ![FB piemērs](img/image-3.png)
 
 3. **Datu bloks (DB) un komunikācija:**
    * Izveido globālo datu bloku, kurā inicializē visus `UDT` un iekārtu aprakstošos mainīgos (šis datu bloks vēlāk tiks izmantots komunikācijai ar HMI).
    
-   ![DB piemērs](image-1.png)
+   ![DB piemērs](img/image-1.png)
 
 4. **Bloku inicializācija:**
    * Izsauc funkciju blokus galvenajā programmā, piesaistot datu bloka structures un reālās I/O no PLC moduļiem.
    
-   ![FB izsauksmes piemērs](image.png)
+   ![FB izsauksmes piemērs](img/image.png)
 
 > 💡 **Piezīme par inicializāciju:** Inicializē tikai tās iekārtas, kas būs tieši nepieciešamas **2. PLC uzdevuma** izpildei!
 
@@ -104,6 +104,8 @@ Tev jāizveido funkciju bloki un UDT šādām iekārtām:
 
 ### 🗺️ Tehnoloģiskais uzdevums:
 Izpēti pievienoto **tehnoloģisko shēmu**. Tev jāizstrādā automātiskā maršruta vadības loģika līnijai: **`SILO1` ➔ `PILE1`**.
+
+![alt text](img/shema.png)
 
 1. **Maršruta palaišana (Start):**
    * Operators nospiež pogu **"Ieslēgt maršrutu"** (*pagaidām PLC mainīgais*).
@@ -143,12 +145,13 @@ Projektā tiek izmantots **Weintek HMI**. Tā izstrādes vide (**EasyBuilder Pro
 * **Ieteicamais komunikācijas draiveris:** `Siemens S7-1200 (Absolute Addressing)` *(var izmantot arī citu sev ērtu draiveri)*.
 * IP adreses šobrīd nav būtiskas — galvenais ir veiksmīgi importēt tagus.
 
-> ⚠️ **Brīdinājums!** Tagus un mainīgos izveido/importē **tikai tām iekārtām, kas ir tieši iesaistītas 2. PLC uzdevumā**!
+> ⚠️  Tagus un mainīgos izveido/importē **tikai tām iekārtām, kas ir tieši iesaistītas 2. PLC uzdevumā**!
 
 #### 💡 Tagu importēšanas gaita (`Import Tags`):
 1. EasyBuilder Pro nospied pogu **Import Tags**.
 2. Izvēlies iespēju importēt datus tieši no TIA Portal projekta vai konkrēta DB faila *(rekomendējam importēt visu TIA Portal projektu un atzīmēt tikai vajadzīgos DB)*.
-3. ⚠️ **Svarīgi:** Pirms TIA Portal projekta importēšanas EasyBuilder Pro vidē, **TIA Portal programmai obligāti jābūt aizvērtai!**
+
+ >⚠️ **Svarīgi:** Pirms TIA Portal projekta importēšanas EasyBuilder Pro vidē, **TIA Portal programmai obligāti jābūt aizvērtai!**
 
 ### 2. Vizualizācijas prasības
 
@@ -164,11 +167,11 @@ Kad dati ir sasaistīti, izveido vizualizācijas saskarni. Dizains šobrīd nav 
 
 ### 🎨 Vizualizācijas piemēri (iedvesmai):
 
-![Vizualizācijas piemērs 1](image-5.png)
+![Vizualizācijas piemērs 1](img/image-5.png)
 
-![Vizualizācijas piemērs 2](image-6.png)
+![Vizualizācijas piemērs 2](img/image-6.png)
 
-![Vizualizācijas piemērs 3](image-7.png)
+![Vizualizācijas piemērs 3](img/image-7.png)
 
 ---
 
