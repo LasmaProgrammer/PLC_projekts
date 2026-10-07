@@ -1,6 +1,6 @@
-# 🛠️ PLC & HMI Testa Uzdevums Candidates
+# 🛠️ PLC & HMI testa uzdevums
 
-Sveiki! Apsveicam ar pievienošanos mūsu atlasē. Šajā dokumentā atradīsi instrukcijas darba uzdevuma izpildei.
+Sveiks! Apsveicam ar pievienošanos mūsu atlasē. Šajā dokumentā atradīsi instrukcijas darba uzdevuma izpildei.
 
 ---
 
@@ -22,7 +22,7 @@ Sveiki! Apsveicam ar pievienošanos mūsu atlasē. Šajā dokumentā atradīsi i
 * Mēs ikdienā izmantojam **Git** versiju kontroli, tāpēc pirms darba sākšanas iepazīsties ar tā darbības pamatprincipiem un **Git Desktop** lietošanu.
 
 ### Darba nodošana
-* Kad uzdevums ir pabeigts, sazipo darba mapi un nosūti to mums atpakaļ.
+* Kad uzdevums ir pabeigts, sazipo darba mapi un nosūti to mums atpakaļ e-pastā.
 
 ---
 
